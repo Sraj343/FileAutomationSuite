@@ -1,0 +1,28 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio files
+*.user
+*.suo
+*.userprefs
+*.cache
+*.vscode/
+*.vs/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Logs
+*.log
+
+# Publish folder
+publish/
+
+# Others
+*.tmp
+*.bak
+
+# Environment files
+.env
