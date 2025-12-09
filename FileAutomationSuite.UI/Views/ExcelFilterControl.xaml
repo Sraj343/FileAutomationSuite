@@ -1,0 +1,71 @@
+﻿<Page x:Class="FileAutomationSuite.UI.Views.ExcelFilterControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FileAutomationSuite.UI.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExcelFilterControl">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ===== TOP AREA: INPUT FILE & OUTPUT PATH ===== -->
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+            <Button Content="Upload Excel"
+                Width="130" Margin="5"
+                Click="UploadExcel_Click"/>
+
+            <TextBlock x:Name="txtInputPath"
+                   VerticalAlignment="Center"
+                   Margin="5 0 20 0"/>
+
+            <Button Content="Select Output Path"
+                Width="150" Margin="5"
+                Click="SelectOutputPath_Click"/>
+
+            <TextBlock x:Name="txtOutputPath"
+                   VerticalAlignment="Center"
+                   Margin="5 0 0 0"/>
+        </StackPanel>
+
+        <!-- ===== FILTERS AREA ===== -->
+        <StackPanel Orientation="Horizontal"
+                Grid.Row="1" Margin="0 0 0 10">
+
+            <TextBlock Text="Filter Column Name:"
+                   VerticalAlignment="Center" Margin="5"/>
+
+            <TextBox x:Name="txtFilterColumn"
+                 Width="150" Height="25" Margin="5"/>
+
+            <CheckBox x:Name="chkIsOriginal"
+                  Content="IsOriginalSheet present in output"
+                  VerticalAlignment="Center"
+                  Margin="15 0 0 0"/>
+        </StackPanel>
+
+        <!-- ===== DATAGRID PREVIEW ===== -->
+        <DataGrid x:Name="ExcelGrid"
+              Grid.Row="2"
+              AutoGenerateColumns="True"
+              CanUserSortColumns="True"
+              IsReadOnly="True"
+              Margin="5"/>
+
+        <!-- ===== SUBMIT BUTTON ===== -->
+        <Button Content="Submit"
+            Grid.Row="3"
+            Width="120" Height="35"
+            HorizontalAlignment="Right"
+            Margin="5"
+            Click="Submit_Click"/>
+    </Grid>
+
+</Page>
