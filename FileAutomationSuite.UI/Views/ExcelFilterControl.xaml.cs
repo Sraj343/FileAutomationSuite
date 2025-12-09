@@ -65,7 +65,6 @@ namespace FileAutomationSuite.UI.Views
                     dt.Rows.Add(dr);
                 }
 
-                ExcelGrid.ItemsSource = dt.DefaultView;
             }
         }
 

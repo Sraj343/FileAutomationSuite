@@ -8,64 +8,88 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ExcelFilterControl">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Background="#f0f0f0" Margin="10">
+        <!-- Main Border Container -->
+        <Border BorderBrush="LightGreen"
+            BorderThickness="2"
+            CornerRadius="6"
+            Padding="20"
+            Margin="10">
 
-        <!-- ===== TOP AREA: INPUT FILE & OUTPUT PATH ===== -->
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-            <Button Content="Upload Excel"
-                Width="130" Margin="5"
-                Click="UploadExcel_Click"/>
+            <Grid HorizontalAlignment="Center" Width="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="180"/>
+                    <!-- Label Column -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Input Column -->
+                </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="txtInputPath"
-                   VerticalAlignment="Center"
-                   Margin="5 0 20 0"/>
+                <!-- ===== INPUT FILE ===== -->
+                <TextBlock Text="Upload Excel File:"
+                       VerticalAlignment="Center"
+                       Grid.Row="0" Grid.Column="0" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                    <Button Content="Browse..."
+                        Width="130" Margin="5"
+                        Click="UploadExcel_Click"/>
+                    <TextBlock x:Name="txtInputPath"
+                           VerticalAlignment="Center"
+                           Margin="5 0 0 0"/>
+                </StackPanel>
 
-            <Button Content="Select Output Path"
-                Width="150" Margin="5"
-                Click="SelectOutputPath_Click"/>
+                <!-- ===== OUTPUT PATH ===== -->
+                <TextBlock Text="Select Output Path:"
+                       VerticalAlignment="Center"
+                       Grid.Row="1" Grid.Column="0" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                    <Button Content="Browse..."
+                        Width="130" Margin="5"
+                        Click="SelectOutputPath_Click"/>
+                    <TextBlock x:Name="txtOutputPath"
+                           VerticalAlignment="Center"
+                           Margin="5 0 0 0"/>
+                </StackPanel>
 
-            <TextBlock x:Name="txtOutputPath"
-                   VerticalAlignment="Center"
-                   Margin="5 0 0 0"/>
-        </StackPanel>
+                <!-- ===== FILTER COLUMN ===== -->
+                <TextBlock Text="Filter Column Name:"
+                       VerticalAlignment="Center"
+                       Grid.Row="2" Grid.Column="0" Margin="5"/>
+                <TextBox x:Name="txtFilterColumn"
+                     Width="150" Height="25"
+                     Grid.Row="2" Grid.Column="1" Margin="5"/>
 
-        <!-- ===== FILTERS AREA ===== -->
-        <StackPanel Orientation="Horizontal"
-                Grid.Row="1" Margin="0 0 0 10">
+                <!-- ===== CHECKBOX ===== -->
+                <TextBlock Text="Options:"
+                       VerticalAlignment="Center"
+                       Grid.Row="3" Grid.Column="0" Margin="5"/>
+                <CheckBox x:Name="chkIsOriginal"
+                      Content="IsOriginalSheet present in output"
+                      VerticalAlignment="Center"
+                      Grid.Row="3" Grid.Column="1" Margin="5 0 0 0"/>
 
-            <TextBlock Text="Filter Column Name:"
-                   VerticalAlignment="Center" Margin="5"/>
-
-            <TextBox x:Name="txtFilterColumn"
-                 Width="150" Height="25" Margin="5"/>
-
-            <CheckBox x:Name="chkIsOriginal"
-                  Content="IsOriginalSheet present in output"
-                  VerticalAlignment="Center"
-                  Margin="15 0 0 0"/>
-        </StackPanel>
-
-        <!-- ===== DATAGRID PREVIEW ===== -->
-        <DataGrid x:Name="ExcelGrid"
-              Grid.Row="2"
-              AutoGenerateColumns="True"
-              CanUserSortColumns="True"
-              IsReadOnly="True"
-              Margin="5"/>
-
-        <!-- ===== SUBMIT BUTTON ===== -->
-        <Button Content="Submit"
-            Grid.Row="3"
-            Width="120" Height="35"
-            HorizontalAlignment="Right"
-            Margin="5"
-            Click="Submit_Click"/>
+                <!-- ===== SUBMIT BUTTON ===== -->
+                <Button Content="Submit"
+                    Width="150" Height="40"
+                    Background="Transparent"
+                    BorderBrush="LightGreen"
+                    BorderThickness="2"
+                    Foreground="LightGreen"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="10 20 10 0"
+                    Click="Submit_Click"/>
+            </Grid>
+        </Border>
     </Grid>
+
+
 
 </Page>
