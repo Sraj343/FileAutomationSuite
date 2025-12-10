@@ -34,27 +34,27 @@ public partial class MainWindow : Window
                 break;
 
             case "ExcelToBCP":
-                MainContent.Content = new TextBlock { Text = "Excel → BCP File Page (Coming Soon)", FontSize = 20 };
+                MainContent.Navigate(new ExcelToBCP());
                 break;
 
             case "BCPToDB":
-                MainContent.Content = new TextBlock { Text = "BCP File → DB Page (Coming Soon)", FontSize = 20 };
+                MainContent.Navigate(new BCPToDataBase());
                 break;
 
             case "DBTableToBCP":
-                MainContent.Content = new TextBlock { Text = "Database Table → BCP Page (Coming Soon)", FontSize = 20 };
+                MainContent.Navigate(new DBTableToBCP());
                 break;
 
-            case "ExcelToDB":
-                MainContent.Content = new TextBlock { Text = "Excel → Database Page (Coming Soon)", FontSize = 20 };
+            case "ExcelToDBTable":
+                MainContent.Navigate(new ExcelToDBTable());
                 break;
 
-            case "DBToExcel":
-                MainContent.Content = new TextBlock { Text = "Database → Excel Page (Coming Soon)", FontSize = 20 };
+            case "DBTableToExcel":
+                MainContent.Navigate(new DBTableToExcel());
                 break;
 
             case "DBToBCP":
-                MainContent.Content = new TextBlock { Text = "Database → BCP Page (Coming Soon)", FontSize = 20 };
+                MainContent.Navigate(new DBToBCP());
                 break;
         }
     }

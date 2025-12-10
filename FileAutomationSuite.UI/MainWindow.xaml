@@ -96,8 +96,8 @@
 
                     <StackPanel>
 
-                        <Button Content="• Excel → Database"
-                                Tag="ExcelToDB"
+                        <Button Content="• Excel → Database Table"
+                                Tag="ExcelToDBTable"
                                 Click="NavButton_Click"
                                 Margin="0 4"
                                 Padding="6 3"
@@ -107,8 +107,8 @@
                                 BorderThickness="0"
                                 HorizontalContentAlignment="Left"/>
 
-                        <Button Content="• Database → Excel"
-                                Tag="DBToExcel"
+                        <Button Content="• Database Table → Excel"
+                                Tag="DBTableToExcel"
                                 Click="NavButton_Click"
                                 Margin="0 4"
                                 Padding="6 3"
