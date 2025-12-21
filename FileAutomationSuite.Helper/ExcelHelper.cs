@@ -1,6 +1,7 @@
-﻿using FileAutomationSuite.Core.Models;
+﻿using FileAutomationSuite.Infrastructure.Models;
 using Microsoft.Extensions.Configuration;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileAutomationSuite.Helper.ExcelHelper
+namespace FileAutomationSuite.Utility
 {
-    class ExcelHelper
+    public static class ExcelHelper
     {
         public static void SaveFileToMergedPath(string inputFile, string directoryPath, string backupFilePath)
         {
@@ -141,6 +142,11 @@ namespace FileAutomationSuite.Helper.ExcelHelper
             return result;
         }
 
+        public static string BuildConnectionString(string server, string db, string user, string pass)
+        {
+            return $"Server={server};Database={db};User Id={user};Password={pass};Encrypt=True;TrustServerCertificate=True;";
+        }
+
         public static IConfiguration GetConfig(string configFilePath)
         {
             var builder = new ConfigurationBuilder()
@@ -148,6 +154,24 @@ namespace FileAutomationSuite.Helper.ExcelHelper
                 .AddJsonFile(Path.GetFileName(configFilePath), optional: false, reloadOnChange: true);
 
             return builder.Build();
+        }
+
+        public static async Task ApplyBordersAndFilters(ExcelWorksheet ws, int colCount, int rowCount)
+        {
+            // Borders
+            using (var range = ws.Cells[1, 1, rowCount, colCount])
+            {
+                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            }
+
+            // AutoFilter
+            ws.Cells[1, 1, rowCount, colCount].AutoFilter = true;
+
+            // Autofit rows
+            ws.Cells.AutoFitColumns();
         }
     }
 }

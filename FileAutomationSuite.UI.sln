@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAutomationSuite.UI", "FileAutomationSuite.UI\FileAutomationSuite.UI.csproj", "{2CB74803-6CEA-4B5B-9368-2F4086C86D4E}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAutomationSuite.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAutomationSuite.Common", "FileAutomationSuite.Common\FileAutomationSuite.Common.csproj", "{CD6E1FA7-62B2-43E4-B4C2-6C055FFF6B7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAutomationSuite.Helper", "FileAutomationSuite.Helper\FileAutomationSuite.Helper.csproj", "{23CDD1B7-2ABC-4AC0-993B-9CC0B9754A1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAutomationSuite.Utility", "FileAutomationSuite.Helper\FileAutomationSuite.Utility.csproj", "{23CDD1B7-2ABC-4AC0-993B-9CC0B9754A1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

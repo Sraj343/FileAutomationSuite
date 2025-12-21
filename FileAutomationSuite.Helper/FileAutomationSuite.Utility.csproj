@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileAutomationSuite.Core\FileAutomationSuite.Core.csproj" />
+    <ProjectReference Include="..\FileAutomationSuite.Infrastructure\FileAutomationSuite.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

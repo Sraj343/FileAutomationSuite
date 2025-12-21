@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileAutomationSuite.Core.Models
+namespace FileAutomationSuite.Infrastructure.Models
 {
     internal class ExcelReadModel
     {
