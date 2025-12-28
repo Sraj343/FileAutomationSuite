@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.BCP
 {
-    internal class BcpExporter
+    public class BcpExporter
     {
 
         /// <summary>

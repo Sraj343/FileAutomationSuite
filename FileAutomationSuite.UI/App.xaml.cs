@@ -1,4 +1,7 @@
-﻿using System.Configuration;
+﻿using FileAutomationSuite.Core.Excel;
+using FileAutomationSuite.Infrastructure.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,5 +12,17 @@ namespace FileAutomationSuite.UI;
 /// </summary>
 public partial class App : Application
 {
+    public static IServiceProvider ServiceProvider { get; private set; }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        var services = new ServiceCollection();
+
+        services.AddSingleton<IExcelBcpService, ProcessExcel>();
+
+        ServiceProvider = services.BuildServiceProvider();
+
+        base.OnStartup(e);
+    }
 }
 

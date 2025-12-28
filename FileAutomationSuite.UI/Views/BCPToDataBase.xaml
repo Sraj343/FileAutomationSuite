@@ -3,12 +3,69 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FileAutomationSuite.UI.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="BCPToDataBase">
+      mc:Ignorable="d"
+      Title="BCP To Database">
 
-    <Grid>
-        
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="BCP File Import to Database"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"/>
+
+        <!-- File Path -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="BCP File:"
+                       Width="120"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="txtFilePath"
+                     Width="420"
+                     Margin="0,0,10,0"
+                     IsReadOnly="True"/>
+            <Button Content="Browse"
+                    Width="80"
+                    Click="BrowseFile_Click"/>
+        </StackPanel>
+
+        <!-- Connection String -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Connection String"/>
+            <TextBox x:Name="txtConnectionString"
+                     Height="60"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"/>
+        </StackPanel>
+
+        <!-- Table Name -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Table Name:"
+                       Width="120"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="txtTableName"
+                     Width="300"/>
+            <Button Content="Start Import"
+                    Width="120"
+                    Margin="20,0,0,0"
+                    Click="StartImport_Click"/>
+        </StackPanel>
+
+        <!-- Log / Status -->
+        <GroupBox Grid.Row="4" Header="Log">
+            <TextBox x:Name="txtLog"
+                     IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap"/>
+        </GroupBox>
+
     </Grid>
 </Page>
+
+    

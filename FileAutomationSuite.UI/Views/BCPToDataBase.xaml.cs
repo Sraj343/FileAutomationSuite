@@ -24,5 +24,37 @@ namespace FileAutomationSuite.UI.Views
         {
             InitializeComponent();
         }
+
+        private void BrowseFile_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "BCP Files (*.bcp;*.txt)|*.bcp;*.txt|All Files (*.*)|*.*"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                txtFilePath.Text = dialog.FileName;
+            }
+        }
+
+        private async void StartImport_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                txtLog.Text = "Import started...\n";
+
+                await ImportBcpAsync(
+                    txtFilePath.Text,
+                    txtConnectionString.Text,
+                    txtTableName.Text);
+
+                txtLog.Text += "Import completed successfully.";
+            }
+            catch (Exception ex)
+            {
+                txtLog.Text += $"Error: {ex.Message}";
+            }
+        }
     }
 }

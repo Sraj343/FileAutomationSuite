@@ -1,4 +1,5 @@
-﻿using FileAutomationSuite.Infrastructure.Models;
+﻿using FileAutomationSuite.Infrastructure.Interfaces;
+using FileAutomationSuite.Infrastructure.Models;
 using FileAutomationSuite.Utility;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.Excel
 {
-    class ProcessExcel
+    public class ProcessExcel : IExcelBcpService
     {
         //Excel to transefer into DataTable with inferred data types
         #region

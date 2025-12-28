@@ -3,12 +3,74 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FileAutomationSuite.UI.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ExcelToBCP">
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="Excel To BCP">
 
-    <Grid>
-        
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Excel to BCP TXT Converter"
+                   FontSize="20"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,20"/>
+
+        <!-- Excel File -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Text="Excel File"/>
+            <DockPanel Margin="0,5,0,0">
+                <TextBox x:Name="TxtExcelPath"
+                         Height="30"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,10,0"/>
+                <Button Content="Browse"
+                        Width="100"
+                        Click="BrowseExcel_Click"/>
+            </DockPanel>
+        </StackPanel>
+
+        <!-- Output TXT -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Output TXT File"/>
+            <DockPanel Margin="0,5,0,0">
+                <TextBox x:Name="TxtOutputPath"
+                         Height="30"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,10,0"/>
+                <Button Content="Browse"
+                        Width="100"
+                        Click="BrowseTxt_Click"/>
+            </DockPanel>
+
+            <!-- Log -->
+            <TextBox x:Name="TxtLog"
+                     Margin="0,15,0,0"
+                     Height="150"
+                     IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,15,0,0">
+            <Button Content="Read Columns"
+                    Width="140"
+                    Margin="0,0,10,0"
+                    Click="ReadColumns_Click"/>
+            <Button Content="Convert To BCP TXT"
+                    Width="180"
+                    Click="Convert_Click"/>
+        </StackPanel>
+
     </Grid>
 </Page>

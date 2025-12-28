@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.SQL
 {
-    class SQLProcess
+    public class SQLProcess
     {
 
-        static void CreateTableFromExcel(string connStr, string tableName, Dictionary<string, string> columns)
+         static void CreateTableFromExcel(string connStr, string tableName, Dictionary<string, string> columns)
         {
             using var conn = new SqlConnection(connStr);
             conn.Open();

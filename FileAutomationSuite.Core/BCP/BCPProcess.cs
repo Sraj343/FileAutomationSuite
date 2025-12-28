@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.BCP
 {
-    class BCPProcess
+    public class BCPProcess
     {
 
         public void ExportTableUsingBCP(string server, string database, string table, string filePath, string user, string pass)
