@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,16 +29,15 @@ namespace FileAutomationSuite.UI.Views
         // Browse for folder
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var dialog = new FolderBrowserDialog())
+            var dialog = new CommonOpenFileDialog
             {
-                dialog.Description = "Select Output Folder for BCP file";
-                dialog.ShowNewFolderButton = true;
-                var result = dialog.ShowDialog();
+                IsFolderPicker = true,
+                Title = "Select Output Folder for BCP file"
+            };
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
-                {
-                    OutputPathTextBox.Text = dialog.SelectedPath;
-                }
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                OutputPathTextBox.Text = dialog.FileName;
             }
         }
 

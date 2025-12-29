@@ -44,10 +44,10 @@ namespace FileAutomationSuite.UI.Views
             {
                 txtLog.Text = "Import started...\n";
 
-                await ImportBcpAsync(
-                    txtFilePath.Text,
-                    txtConnectionString.Text,
-                    txtTableName.Text);
+                //await ImportBcpAsync(
+                //    txtFilePath.Text,
+                //    txtConnectionString.Text,
+                //    txtTableName.Text);
 
                 txtLog.Text += "Import completed successfully.";
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileAutomationSuite.Infrastructure.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.BCP
 {
-    public class BCPProcess
+    public class BCPProcess : IBCPService
     {
 
         public void ExportTableUsingBCP(string server, string database, string table, string filePath, string user, string pass)

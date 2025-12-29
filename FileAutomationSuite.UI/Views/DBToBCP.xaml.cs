@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FileAutomationSuite.UI.Views
 {
@@ -28,19 +29,20 @@ namespace FileAutomationSuite.UI.Views
 
 
         // Browse button click
-        private void BrowseFolder_Click(object sender, RoutedEventArgs e)
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var dialog = new FolderBrowserDialog())
+            var dialog = new CommonOpenFileDialog
             {
-                dialog.Description = "Select Output Folder";
-                dialog.ShowNewFolderButton = true;
+                IsFolderPicker = true,
+                Title = "Select Output Folder"
+            };
 
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    OutputFolderTextBox.Text = dialog.SelectedPath;
-                }
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                OutputFolderTextBox.Text = dialog.FileName;
             }
         }
+
 
         // Export button click
         private void ExportButton_Click(object sender, RoutedEventArgs e)

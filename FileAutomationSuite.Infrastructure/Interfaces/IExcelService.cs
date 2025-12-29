@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Infrastructure.Interfaces
 {
-    public interface IExcelBcpService
+    public interface IExcelService
     {
         Dictionary<string, string> ReadExcelColumnsWithDataType(string excelPath);
         void ExcelToBcpTxtSafe(string excelPath, string outputTxtPath);

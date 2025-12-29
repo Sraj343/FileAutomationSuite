@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FileAutomationSuite.Core.Excel
 {
-    public class ProcessExcel : IExcelBcpService
+    public class ProcessExcel : IExcelService
     {
         //Excel to transefer into DataTable with inferred data types
         #region
@@ -289,7 +289,7 @@ namespace FileAutomationSuite.Core.Excel
                     rowIndex++;
                 }
 
-                ExcelHelper.ApplyBordersAndFilters(ws, selectedColumns.Count, rowIndex - 1);
+                await ExcelHelper.ApplyBordersAndFilters(ws, selectedColumns.Count, rowIndex - 1);
             }
 
             // Save file

@@ -13,11 +13,7 @@ namespace FileAutomationSuite.Core.BCP
         /// <summary>
         /// Exports an entire SQL table into a BCP text file.
         /// </summary>
-        public static string ExportTableToBcp(
-            string connectionString,
-            string databaseName,
-            string tableName,
-            string outputDirectory)
+        public static string ExportTableToBcp(string connectionString,string databaseName,string tableName,string outputDirectory)
         {
             if (!Directory.Exists(outputDirectory))
                 Directory.CreateDirectory(outputDirectory);
@@ -70,11 +66,7 @@ namespace FileAutomationSuite.Core.BCP
         }
 
 
-        public static bool ImportBcpFile(
-        string connectionString,
-        string databaseName,
-        string tableName,
-        string bcpFilePath)
+        public static bool ImportBcpFile(string connectionString,string databaseName,string tableName,string bcpFilePath)
         {
             // BCP command
             string arguments =

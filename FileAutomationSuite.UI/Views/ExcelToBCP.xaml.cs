@@ -24,11 +24,11 @@ namespace FileAutomationSuite.UI.Views
     public partial class ExcelToBCP : Page
     {
 
-        private readonly IExcelBcpService _excelService;
+        private readonly IExcelService _excelService;
         public ExcelToBCP()
         {
             InitializeComponent();
-            _excelService = (IExcelBcpService)App.ServiceProvider.GetService(typeof(IExcelBcpService))!;
+            _excelService = (IExcelService)App.ServiceProvider.GetService(typeof(IExcelService))!;
         }
 
         private void BrowseExcel_Click(object sender, RoutedEventArgs e)
