@@ -3,6 +3,7 @@ using FileAutomationSuite.Core.Excel;
 using FileAutomationSuite.Core.SQL;
 using FileAutomationSuite.Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using OfficeOpenXml;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -20,6 +21,7 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
 
+        ExcelPackage.License.SetNonCommercialOrganization("Add the Test Check");
         services.AddSingleton<IExcelService, ProcessExcel>();
         //services.AddSingleton<ISQLService, SQLProcess>();
         services.AddSingleton<IBCPService, BCPProcess>();

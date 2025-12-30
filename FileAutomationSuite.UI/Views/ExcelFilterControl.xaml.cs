@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using FileAutomationSuite.Infrastructure.Interfaces;
+using Microsoft.Win32;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FileAutomationSuite.UI.Views
 {
@@ -24,16 +24,24 @@ namespace FileAutomationSuite.UI.Views
     /// </summary>
     public partial class ExcelFilterControl : Page
     {
+        private readonly IExcelService _excelService;
+
+        // ColumnName -> ColumnIndex mapping
+        private Dictionary<string, int> _columnIndexMap = new();
+
         public ExcelFilterControl()
         {
             InitializeComponent();
+            _excelService = (IExcelService)App.ServiceProvider.GetService(typeof(IExcelService))!;
         }
 
         // ================== UPLOAD EXCEL ==================
         private void UploadExcel_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "Excel Files (*.xlsx;*.xlsm)|*.xlsx;*.xlsm";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Excel Files (*.xlsx;*.xlsm)|*.xlsx;*.xlsm"
+            };
 
             if (dialog.ShowDialog() == true)
             {
@@ -42,36 +50,42 @@ namespace FileAutomationSuite.UI.Views
             }
         }
 
-        // Load Excel into DataGrid
+        // ================== LOAD EXCEL & COLUMNS ==================
         private void LoadExcel(string filePath)
         {
-            using (var package = new ExcelPackage(new FileInfo(filePath)))
+            lstColumns.ItemsSource = null;
+            _columnIndexMap.Clear();
+
+            using var package = new ExcelPackage(new FileInfo(filePath));
+            var sheet = package.Workbook.Worksheets[0];
+
+            if (sheet?.Dimension == null)
             {
-                var sheet = package.Workbook.Worksheets[0];
-
-                DataTable dt = new DataTable();
-
-                // Read header
-                for (int col = 1; col <= sheet.Dimension.End.Column; col++)
-                    dt.Columns.Add(sheet.Cells[1, col].Text);
-
-                // Read rows
-                for (int row = 2; row <= sheet.Dimension.End.Row; row++)
-                {
-                    DataRow dr = dt.NewRow();
-                    for (int col = 1; col <= sheet.Dimension.End.Column; col++)
-                        dr[col - 1] = sheet.Cells[row, col].Text;
-
-                    dt.Rows.Add(dr);
-                }
-
+                MessageBox.Show("Excel sheet is empty.");
+                return;
             }
+
+            List<string> columnNames = new();
+
+            // Read header row
+            for (int col = 1; col <= sheet.Dimension.End.Column; col++)
+            {
+                string columnName = sheet.Cells[1, col].Text;
+
+                if (!string.IsNullOrWhiteSpace(columnName))
+                {
+                    columnNames.Add(columnName);
+                    _columnIndexMap[columnName] = col; // 1-based index
+                }
+            }
+
+            lstColumns.ItemsSource = columnNames;
         }
 
         // ================== SELECT OUTPUT PATH ==================
         private void SelectOutputPath_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog
+            var dialog = new OpenFileDialog
             {
                 CheckFileExists = false,
                 CheckPathExists = true,
@@ -80,9 +94,35 @@ namespace FileAutomationSuite.UI.Views
 
             if (dialog.ShowDialog() == true)
             {
-                string folderPath = System.IO.Path.GetDirectoryName(dialog.FileName);
-                txtOutputPath.Text = folderPath;
+                txtOutputPath.Text = Path.GetDirectoryName(dialog.FileName);
             }
+        }
+
+        private void ChkSelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            lstColumns.SelectAll();
+        }
+
+
+        private void ChkSelectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lstColumns.UnselectAll();
+        }
+
+
+        private void LstColumns_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstColumns.Items.Count == 0)
+                return;
+
+            chkSelectAllColumns.Checked -= ChkSelectAll_Checked;
+            chkSelectAllColumns.Unchecked -= ChkSelectAll_Unchecked;
+
+            chkSelectAllColumns.IsChecked =
+                lstColumns.SelectedItems.Count == lstColumns.Items.Count;
+
+            chkSelectAllColumns.Checked += ChkSelectAll_Checked;
+            chkSelectAllColumns.Unchecked += ChkSelectAll_Unchecked;
         }
 
 
@@ -106,12 +146,37 @@ namespace FileAutomationSuite.UI.Views
                 return;
             }
 
+            // ✅ Get selected column names
+            var selectedColumnNames = lstColumns.SelectedItems
+                                     .Cast<string>()
+                                     .ToList();
+
+
+            if (!selectedColumnNames.Any())
+            {
+                MessageBox.Show("Please select at least one column.");
+                return;
+            }
+
+            // ✅ Convert names → column indexes
+            List<int> selectedColumnIndexes = selectedColumnNames
+                                              .Select(name => _columnIndexMap[name])
+                                              .ToList();
+
             MessageBox.Show(
                 $"File: {inputFile}\n" +
                 $"Output: {outputFolder}\n" +
                 $"Filter Column: {filterColumnName}\n" +
-                $"IsOriginalSheet: {isOriginal}",
+                $"Selected Columns: {string.Join(", ", selectedColumnNames)}",
                 "Submit Clicked");
+
+            // 🔥 Call service
+            _excelService.ProcessExcelAsync(
+                inputFile,
+                outputFolder,
+                filterColumnName,
+                isOriginal,
+                selectedColumnIndexes);
         }
     }
 }

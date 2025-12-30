@@ -10,5 +10,7 @@ namespace FileAutomationSuite.Infrastructure.Interfaces
     {
         Dictionary<string, string> ReadExcelColumnsWithDataType(string excelPath);
         void ExcelToBcpTxtSafe(string excelPath, string outputTxtPath);
+
+        Task ProcessExcelAsync(string inputFilePath, string outputFilePath, string filterColumnName, bool includeOriginal, List<int> selectedColumns);
     }
 }

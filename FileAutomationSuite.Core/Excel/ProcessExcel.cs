@@ -171,8 +171,10 @@ namespace FileAutomationSuite.Core.Excel
         //Excel to Fileter Mutiple Sheet Using column Name 
         #region
 
-        public async Task ProcessExcelAsync(string inputFilePath,string outputFilePath,string filterColumnName,bool includeOriginal,List<int> selectedColumns)
+        public async Task ProcessExcelAsync(string inputFilePath,string outputPath,string filterColumnName,bool includeOriginal,List<int> selectedColumns)
         {
+
+            string outputFilePath = Path.Combine(outputPath,"TestingOutput.xlsx");
             using var package = new ExcelPackage(new FileInfo(inputFilePath));
             var worksheet = package.Workbook.Worksheets[0];
             var rowCount = worksheet.Dimension.Rows;

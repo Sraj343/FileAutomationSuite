@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FileAutomationSuite.Infrastructure.Interfaces;
 
 namespace FileAutomationSuite.UI.Views
 {
@@ -21,9 +22,11 @@ namespace FileAutomationSuite.UI.Views
     /// </summary>
     public partial class DBTableToBCP : Page
     {
+        private readonly IBCPService _bcpService;
         public DBTableToBCP()
         {
             InitializeComponent();
+            _bcpService = (IBCPService)App.ServiceProvider.GetService(typeof(IBCPService))!;
         }
 
         // Browse for folder
@@ -44,7 +47,9 @@ namespace FileAutomationSuite.UI.Views
         // Clear all fields
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            ConnectionStringTextBox.Text = string.Empty;
+            ServerTextbox.Text = string.Empty;
+            UserNameTextBox.Text = string.Empty;
+            PasswordBox.Password = string.Empty;
             DatabaseNameTextBox.Text = string.Empty;
             TableNameTextBox.Text = string.Empty;
             OutputPathTextBox.Text = string.Empty;
@@ -54,13 +59,15 @@ namespace FileAutomationSuite.UI.Views
         // Export to BCP (placeholder)
         private void ExportToBcp_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = ConnectionStringTextBox.Text;
+            string server = ServerTextbox.Text;
+            string userName = UserNameTextBox.Text;
+            string password = PasswordBox.Password;
             string databaseName = DatabaseNameTextBox.Text;
             string tableName = TableNameTextBox.Text;
             string outputPath = OutputPathTextBox.Text;
             string fileName = FileNameTextBox.Text;
 
-            if (string.IsNullOrWhiteSpace(connectionString) ||
+            if (string.IsNullOrWhiteSpace(server) || string.IsNullOrWhiteSpace(userName)|| string.IsNullOrWhiteSpace(password)||
                 string.IsNullOrWhiteSpace(databaseName) ||
                 string.IsNullOrWhiteSpace(tableName) ||
                 string.IsNullOrWhiteSpace(outputPath) ||
@@ -72,6 +79,8 @@ namespace FileAutomationSuite.UI.Views
 
             // TODO: Implement your BCP export logic here
             System.Windows.MessageBox.Show($"BCP export started for table {tableName}!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            _bcpService.ExportTableUsingBCP(server, databaseName, tableName, outputPath, userName, password);
         }
 
     }

@@ -63,7 +63,7 @@
                                 BorderThickness="0"
                                 HorizontalContentAlignment="Left"/>
 
-                        <Button Content="• BCP File → Database"
+                        <!--<Button Content="• BCP File → Database"
                                 Tag="BCPToDB"
                                 Click="NavButton_Click"
                                 Margin="0 4"
@@ -72,7 +72,7 @@
                                 Foreground="White"
                                 FontWeight="Bold"
                                 BorderThickness="0"
-                                HorizontalContentAlignment="Left"/>
+                                HorizontalContentAlignment="Left"/>-->
 
                         <Button Content="• Database Table → BCP File"
                                 Tag="DBTableToBCP"
@@ -118,7 +118,7 @@
                                 BorderThickness="0"
                                 HorizontalContentAlignment="Left"/>
 
-                        <Button Content="• Database → BCP File"
+                        <!--<Button Content="• Database → BCP File"
                                 Tag="DBToBCP"
                                 Click="NavButton_Click"
                                 Margin="0 4"
@@ -127,7 +127,7 @@
                                 Foreground="White"
                                 FontWeight="Bold"
                                 BorderThickness="0"
-                                HorizontalContentAlignment="Left"/>
+                                HorizontalContentAlignment="Left"/>-->
                     </StackPanel>
                 </Expander>
 
